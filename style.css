@@ -1,0 +1,45 @@
+html {
+    font-family: sans-serif;
+}
+
+.container {
+    padding: 0 10px
+}
+
+.column {
+    width: 200px;
+    float: left;
+    background-color: #ccc;
+    padding: 10px;
+}
+
+.column-header {
+    margin-bottom: 10px;
+}
+
+.column:not(:first-child) {
+    margin-left: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.add-card {
+    
+}
+
+.open-add-card {
+    color: #787878;
+}
+
+.empty-column {
+    height: 20px;
+}
+
+.list-card {
+    background-color: white;
+    border-bottom: 1px solid #474747;
+    padding: 8px 0px 4px 10px;
+    margin-bottom: 5px;
+}
