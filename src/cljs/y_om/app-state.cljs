@@ -4,5 +4,7 @@
                                    :starred false
                                    :private false}
                       :columns [{:name "To Do" :cards []}
-                                {:name "Doing" :cards [{:task "Do work"}]}
-                                {:name "Done" :cards []}]}))
+                                {:name "Doing" :cards [{:task "Do work"
+                                                        :id 1}]}
+                                {:name "Done" :cards []}]
+                      :focus-card [1]}))
