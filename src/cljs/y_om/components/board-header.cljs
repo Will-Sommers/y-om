@@ -11,6 +11,11 @@
     om/IRender
     (render [_]
       (html [:div.board-header 
-             [:div.board-name (:board-name data)]
-             [:span.board-star {:on-click #(utils/toggle-board-attribute data :starred)} (str "Starred: "(:starred data))]
-             [:span.private {:on-click #(utils/toggle-board-attribute data :private)} (str "Private: " (:private data))]]))))
+             [:h3 (:board-name data)]
+             [:span.icon {:on-click #(utils/toggle-board-attribute data :starred)
+                                :class (str "starred-" (:starred data))}]
+             [:span.icon {:on-click #(utils/toggle-board-attribute data :private)
+                          :class (str "private-" (:private data)) }]
+             [:div.show-sidebar 
+              [:div "Show sidebar"]]
+             ]))))

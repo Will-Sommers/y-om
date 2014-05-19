@@ -20,5 +20,4 @@ goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.asy
 goog.addDependency("../y_om/components/columns.js", ['y_om.components.columns'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'y_om.components.cards', 'om.dom', 'cljs.core.async']);
 goog.addDependency("../y_om/app_state.js", ['y_om.app_state'], ['cljs.core']);
 goog.addDependency("../y_om/components/board_header.js", ['y_om.components.board_header'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'om.dom']);
-goog.addDependency("../y_om/components/draggable.js", ['y_om.components.draggable'], ['cljs.core', 'om.core', 'om.dom', 'cljs.core.async']);
-goog.addDependency("../y_om/core.js", ['y_om.core'], ['sablono.core', 'y_om.components.draggable', 'cljs.core', 'y_om.components.board_header', 'y_om.components.columns', 'y_om.app_state', 'om.core', 'y_om.components.cards', 'om.dom', 'cljs.core.async']);
+goog.addDependency("../y_om/core.js", ['y_om.core'], ['sablono.core', 'y_om.utils', 'cljs.core', 'y_om.components.board_header', 'y_om.components.columns', 'y_om.app_state', 'om.core', 'y_om.components.cards', 'om.dom', 'cljs.core.async']);

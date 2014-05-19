@@ -1,0 +1,145 @@
+body {
+  margin: 0px; }
+
+html {
+  font-family: sans-serif;
+  overflow: hidden; }
+
+.container {
+  padding: 0px 10px;
+  height: 100%;
+  background-color: #1C9C42; }
+
+.column {
+  width: 200px;
+  float: left;
+  background-color: #ccc;
+  padding: 10px; }
+
+.add-column {
+  margin-left: 5px;
+  width: 200px;
+  float: left;
+  padding: 10px;
+  background-color: #0F661F; }
+  .add-column:hover {
+    background-color: #0c5018; }
+
+.column-header {
+  margin-bottom: 10px;
+  cursor: -webkit-grab; }
+
+.column:not(:first-child) {
+  margin-left: 5px; }
+
+.hide {
+  display: none; }
+
+.open-add-card {
+  color: #787878; }
+
+.empty-column {
+  height: 20px; }
+
+.list-card {
+  background-color: white;
+  border-bottom: 1px solid #474747;
+  padding: 6px 0px 8px 10px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #474747; }
+
+.add-card {
+  font-size: 14px; }
+  .add-card:hover {
+    text-decoration: underline; }
+
+.card-modal {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
+  background-color: #ccc; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+header {
+  margin: 0px;
+  background-color: #58E883;
+  height: 30px;
+  width: 100%; }
+
+.icon {
+  position: relative; }
+
+.private-true:after {
+  content: "\f023";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: white;
+  font-size: 18px;
+  padding-right: 0.5em; }
+
+.private-false:after {
+  content: "\f025";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: white;
+  font-size: 18px;
+  padding-right: 0.5em; }
+
+.starred-true:after {
+  content: "\f005";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: white;
+  font-size: 18px;
+  padding-right: 0.5em; }
+
+.starred-false:after {
+  content: "\f005";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: #E9ED72;
+  font-size: 18px;
+  padding-right: 0.5em; }
+
+.board-header {
+  color: white;
+  padding: 12px 0px; }
+  .board-header h3, .board-header div, .board-header span {
+    display: inline-block; }
+
+h5, h4, h3 {
+  margin: 0px; }
+
+.show-sidebar {
+  font-size: 14px;
+  color: white;
+  position: fixed;
+  right: 0;
+  width: 140px;
+  text-decoration: underline;
+  padding: 10px 20px;
+  display: none !important; }
+  .show-sidebar:hover {
+    background-color: #525252; }
+
+.sidebar {
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  right: 0px;
+  background-color: #ccc; }
