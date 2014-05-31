@@ -1,5 +1,6 @@
 (ns y-om.utils
   (:require
+   [clojure.string :as string]
    [om.core :as om :include-macros true]
    [sablono.core :as html :include-macros true]))
 
@@ -16,4 +17,16 @@
                        2)]
     #js {:left left}))
 
-
+(defn get-query-params []
+  (let [params (-> js/location
+             (.-search)
+             (.substr 1)
+             (string/split #"&"))
+        params-hash (into '{} (doall
+                               (map
+                                #(let [param-vec (string/split % #"=")]
+                                   (println (type (first param-vec)))
+                                   (hash-map (first param-vec) (last param-vec)))
+                                params)))]
+    (if (= "1" (get params-hash "ankha"))
+      true)))

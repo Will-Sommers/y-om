@@ -48,6 +48,8 @@ html {
   margin-bottom: 5px;
   font-size: 12px;
   color: #474747; }
+  .list-card:hover {
+    background-color: #f5f5f5; }
 
 .add-card {
   font-size: 14px; }
@@ -143,3 +145,15 @@ h5, h4, h3 {
   height: 100%;
   right: 0px;
   background-color: #ccc; }
+
+#ankha-header {
+  background-color: #ccc;
+  height: 25px;
+  width: 100%; }
+
+#inspector {
+  position: fixed;
+  background-color: white;
+  border: 1px solid #ccc;
+  top: 350px;
+  left: 50px; }

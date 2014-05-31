@@ -9,7 +9,8 @@
    [sablono.core :as html :refer-macros [html]]
    [y-om.components.board-header :as header]
    [y-om.components.cards :as cards]
-   [y-om.components.columns :as columns]))
+   [y-om.components.columns :as columns]
+   [ankha.core :as ankha]))
 
 
 (enable-console-print!)
@@ -27,7 +28,10 @@
 (defn add-column [owner data state ref]
   (let [element (om/get-node owner ref)
         text (. element -value)]
-    (om/transact! data :columns #(conj % {:name text :cards []}))
+    (om/transact! data
+                  :columns
+                  #(conj % {:name text :cards []})
+                  :testing)
     (utils/toggle-component-state owner state)))
 
 (defn render-input [owner data submit-fn val state ref button-text]
@@ -44,6 +48,7 @@
 
 (defn board-view [data owner]
   (reify
+    
     om/IInitState
     (init-state [_]
       {:c-board-control (chan)
@@ -67,9 +72,7 @@
          (om/build header/board-header (:board-info data))
          [:div.board-container
           (map
-           #(om/build columns/columns-view % {:init-state {:c-board-control c-board-control
-                                                           :edit-header? false
-                                                           :show-input? false}
+           #(om/build columns/columns-view % {:init-state {:c-board-control c-board-control}
                                               :state {:pos %2
                                                       :n-columns (count (:columns data))}})
            (:columns data)
@@ -81,14 +84,27 @@
           [:div.sidebar]]]]))))
 
 (defn app [data owner]
-  (om/component
+  (om/component 
    (html [:div
           (om/build board-view data)])))
 
+(defn ankha-viewer [data owner]
+  (om/component
+   (html
+    [:div
+     [:div#ankha-header "Ankha Inspector"]
+     [:div#inspector (om/build ankha/inspector data)]])))
 (defn init [app-state]
-  (om/root
-   app
-   app-state
-   {:target (. js/document (getElementById "app"))}))
+  (let [options (utils/get-query-params)]
+    (om/root
+     app
+     app-state
+     {:target (. js/document (getElementById "app"))})
+    (if options
+      (om/root
+       ankha-viewer
+       app-state
+       {:target (. js/document (getElementById "inspector-view"))}))))
 
 (init app-state/app-state)
+
