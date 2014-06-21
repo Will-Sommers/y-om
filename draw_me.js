@@ -7,9 +7,8 @@ goog.addDependency("../sablono/util.js", ['sablono.util'], ['cljs.core', 'clojur
 goog.addDependency("../sablono/interpreter.js", ['sablono.interpreter'], ['cljs.core', 'clojure.string', 'sablono.util']);
 goog.addDependency("../sablono/core.js", ['sablono.core'], ['cljs.core', 'goog.dom', 'clojure.walk', 'clojure.string', 'sablono.interpreter', 'sablono.util']);
 goog.addDependency("../om/dom.js", ['om.dom'], ['cljs.core']);
-goog.addDependency("../om/core.js", ['om.core'], ['cljs.core', 'om.dom']);
+goog.addDependency("../om/core.js", ['om.core'], ['cljs.core', 'om.dom', 'goog.ui.IdGenerator']);
 goog.addDependency("../y_om/utils.js", ['y_om.utils'], ['sablono.core', 'cljs.core', 'om.core', 'clojure.string']);
-goog.addDependency("../y_om/components/cards.js", ['y_om.components.cards'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'om.dom']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/ioc_helpers.js", ['cljs.core.async.impl.ioc_helpers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
@@ -17,8 +16,13 @@ goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl
 goog.addDependency("../cljs/core/async/impl/channels.js", ['cljs.core.async.impl.channels'], ['cljs.core.async.impl.buffers', 'cljs.core', 'cljs.core.async.impl.dispatch', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core', 'cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.buffers', 'cljs.core', 'cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.timers']);
+goog.addDependency("../y_om/components/sidebar.js", ['y_om.components.sidebar'], ['sablono.core', 'cljs.core', 'om.core', 'om.dom', 'cljs.core.async']);
+goog.addDependency("../y_om/components/cards.js", ['y_om.components.cards'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'om.dom']);
 goog.addDependency("../y_om/components/columns.js", ['y_om.components.columns'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'y_om.components.cards', 'clojure.string', 'om.dom', 'cljs.core.async']);
-goog.addDependency("../y_om/app_state.js", ['y_om.app_state'], ['cljs.core']);
+goog.addDependency("../y_om/components/card_modal.js", ['y_om.components.card_modal'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'om.dom']);
 goog.addDependency("../y_om/components/board_header.js", ['y_om.components.board_header'], ['sablono.core', 'y_om.utils', 'cljs.core', 'om.core', 'om.dom']);
+goog.addDependency("../y_om/app_state.js", ['y_om.app_state'], ['cljs.core']);
+goog.addDependency("../y_om/components/board.js", ['y_om.components.board'], ['y_om.components.card_modal', 'sablono.core', 'y_om.utils', 'cljs.core', 'y_om.components.board_header', 'y_om.components.columns', 'y_om.components.sidebar', 'y_om.app_state', 'om.core', 'y_om.components.cards', 'om.dom', 'cljs.core.async']);
 goog.addDependency("../ankha/core.js", ['ankha.core'], ['cljs.core', 'goog.object', 'om.core', 'clojure.string', 'om.dom']);
-goog.addDependency("../y_om/core.js", ['y_om.core'], ['sablono.core', 'y_om.utils', 'cljs.core', 'y_om.components.board_header', 'y_om.components.columns', 'y_om.app_state', 'om.core', 'y_om.components.cards', 'om.dom', 'ankha.core', 'cljs.core.async']);
+goog.addDependency("../y_om/components/app.js", ['y_om.components.app'], ['y_om.components.board', 'sablono.core', 'cljs.core', 'om.core', 'ankha.core', 'cljs.core.async']);
+goog.addDependency("../y_om/core.js", ['y_om.core'], ['sablono.core', 'y_om.utils', 'cljs.core', 'y_om.app_state', 'om.core', 'y_om.components.cards', 'ankha.core', 'cljs.core.async', 'y_om.components.app']);

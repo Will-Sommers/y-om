@@ -40,7 +40,7 @@
                      :defaultValue val
                      :on-key-down #(if (= 13 (.. % -keyCode))
                                      (submit-fn owner data state ref))}]
-            (html/submit-button {:on-click 
+            (html/submit-button {:on-click
                                  #(submit-fn owner data state ref)}
                                 button-text)
             [:a.close {:on-click #(toggle-header data state)} "Close"])))
@@ -48,7 +48,7 @@
 
 (defn column-header [data owner]
   (reify
-    
+
     om/IRender
     (render [_]
       (let [add-header? (get-in data [:state :add-header?])]
@@ -63,15 +63,16 @@
 
     om/IRenderState
     (render-state [this {:keys [pos n-columns c-board-control]}]
+
       (let [add-card? (get-in data [:state :add-card?])]
-        (html [:div.column {:on-mousedown (om/set-state! owner :dragging true)}
+        (html [:div.column {:on-mousedown #(om/set-state! owner :dragging true)}
 
                (om/build column-header data)
 
                (if (empty? (:cards data))
                  [:div.empty-column]
                  (apply dom/div #js {:id "yar"}
-                        
+
                         (om/build-all cards/card-view (:cards data) {:init-state {:pos 1}})))
                [:div {:class (display? add-card?)}
                 (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add")]
@@ -83,7 +84,3 @@
                   [:a.left {:on-click #(put! c-board-control {:pos pos :direction :left})} "<<"])
                 (if (not= (+ 1 pos) n-columns)
                   [:a.right {:on-click #(put! c-board-control {:pos pos :direction :right})} ">>"])]])))))
-
-
-
-

@@ -4,7 +4,6 @@
    [om.core :as om :include-macros true]
    [sablono.core :as html :include-macros true]))
 
-
 (defn toggle-component-state [owner attribute]
   (om/set-state! owner attribute (not (om/get-state owner attribute))))
 
@@ -25,7 +24,6 @@
         params-hash (into '{} (doall
                                (map
                                 #(let [param-vec (string/split % #"=")]
-                                   (println (type (first param-vec)))
                                    (hash-map (first param-vec) (last param-vec)))
                                 params)))]
     (if (= "1" (get params-hash "ankha"))

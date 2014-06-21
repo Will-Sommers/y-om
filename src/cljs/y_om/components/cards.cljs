@@ -6,18 +6,9 @@
    [sablono.core :as html :refer-macros [html]]))
 
 
+
 (defn card-view [data owner]
   (reify
     om/IRender
     (render [_]
-      (html [:div.list-card (:task data)]))))
-
-
-(defn card-modal [data owner]
-  (reify
-    om/IRender
-    (render [_]
-      (html [:div.card-modal {:style (utils/modal-center)} (:test data)]))))
-
-
-
+      (html [:div.list-card {:on-click #(println "test")} (:task data)]))))
