@@ -12,4 +12,5 @@ pom.xml.asc
 /out
 .#*
 .#*#
-/.sass-cache
+/styles/css/.sass-cache
+/styles/css/#style.css#
