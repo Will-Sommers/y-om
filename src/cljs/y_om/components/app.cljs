@@ -3,9 +3,8 @@
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]
-   [y-om.components.board :as board]
    [sablono.core :as html :refer-macros [html]]
-   [ankha.core :as ankha]))
+   [y-om.components.board :as board]))
 
 (enable-console-print!)
 

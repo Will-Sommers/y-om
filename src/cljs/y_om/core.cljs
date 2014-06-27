@@ -2,11 +2,10 @@
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
-   [y-om.app-state :as app-state]
-   [y-om.utils :as utils]
    [om.core :as om :include-macros true]
    [sablono.core :as html :refer-macros [html]]
-   [y-om.components.cards :as cards]
+   [y-om.app-state :as app-state]
+   [y-om.utils :as utils]
    [y-om.components.app :as app]
    [ankha.core :as ankha]))
 
