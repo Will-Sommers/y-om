@@ -3,16 +3,15 @@
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]
-   [om.dom :as dom :include-macros true]
-   [sablono.core :as html :refer-macros [html]]))
+   [om-tools.dom :as dom :include-macros true]
+   [om-tools.core :refer-macros [defcomponent]]))
 
 
-(defn sidebar-component [data owner]
-  (reify
-    om/IRenderState
-    (render-state [_ {:keys [c-board-control]}]
-      (html
-       (if (:open data)
-         [:div
-          [:div.sidebar {:on-click #(put! c-board-control [:sidebar :close])} "Close"]]
-         [:div])))))
+(defcomponent sidebar-component [data owner]
+
+  (render-state [_ {:keys [c-board-control]}]
+    (if (:open data)
+      (dom/div
+        (dom/div {:class "sidebar"
+                  :on-click #(put! c-board-control [:sidebar :close])} "Close"))
+      (dom/div "hi"))))
