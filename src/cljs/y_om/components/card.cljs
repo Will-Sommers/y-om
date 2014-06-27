@@ -10,7 +10,7 @@
 
 
 
-(defn card-view [data owner]
+(defn card-component [data owner]
   (reify
     om/IInitState
     (init-state [_]

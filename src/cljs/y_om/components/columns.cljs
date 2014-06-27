@@ -2,7 +2,7 @@
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:require
    [y-om.utils :as utils]
-   [y-om.components.cards :as cards]
+   [y-om.components.card :as card]
    [clojure.string :as string]
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]

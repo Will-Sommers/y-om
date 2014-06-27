@@ -8,7 +8,7 @@
    [om.dom :as dom :include-macros true]
    [sablono.core :as html :refer-macros [html]]
    [y-om.components.board-header :as header]
-   [y-om.components.cards :as cards]
+   [y-om.components.card :as card]
    [y-om.components.columns :as columns]
    [y-om.components.sidebar :as sidebar]
    [y-om.components.card-modal :as card-modal]
