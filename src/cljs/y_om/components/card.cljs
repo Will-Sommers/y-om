@@ -21,5 +21,6 @@
 
   (render-state [_ {:keys [dragging c-drag-card]}]
     (let [c-column-control (om/get-state owner :c-column-control)]
-      (dom/div {:class "list-card"}
+      (dom/div {:class "list-card"
+                :on-click #(if-not dragging (put! c-column-control (:id @data)))}
         (dom/div (:task data))))))
