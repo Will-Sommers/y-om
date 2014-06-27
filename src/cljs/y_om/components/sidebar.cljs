@@ -7,12 +7,12 @@
    [sablono.core :as html :refer-macros [html]]))
 
 
-(defn sidebar [data owner]
+(defn sidebar-component [data owner]
   (reify
-    om/IRender
-    (render [_]
+    om/IRenderState
+    (render-state [_ {:keys [c-board-control]}]
       (html
        (if (:open data)
          [:div
-          [:div.sidebar {:on-click #(om/transact! data :open (fn [x] false))} "Close"]]
+          [:div.sidebar {:on-click #(put! c-board-control [:sidebar :close])} "Close"]]
          [:div])))))

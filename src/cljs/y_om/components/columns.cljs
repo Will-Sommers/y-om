@@ -81,6 +81,6 @@
                               :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."]]
                [:div
                 (if (not= pos 0)
-                  [:a.left {:on-click #(put! c-board-control {:pos pos :direction :left})} "<<"])
+                  [:a.left {:on-click #(put! c-board-control [:move-column {:pos pos :direction :left}])} "<<"])
                 (if (not= (+ 1 pos) n-columns)
-                  [:a.right {:on-click #(put! c-board-control {:pos pos :direction :right})} ">>"])]])))))
+                  [:a.right {:on-click #(put! c-board-control [:move-column {:pos pos :direction :right}])} ">>"])]])))))

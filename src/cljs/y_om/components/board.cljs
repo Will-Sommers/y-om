@@ -59,9 +59,12 @@
     (will-mount [_]
       (let [c-board-control (om/get-state owner :c-board-control)]
         (go (while true
-              (let [command (<! c-board-control)]
-                (move-column data command))))))
-
+              (let [[msg-name command] (<! c-board-control)]
+                (condp = msg-name
+                  :move-column (move-column data command)
+                  :sidebar (om/transact! data [:sidebar :open] #(if (= command :open)
+                                                                  true
+                                                                  false))))))))
     om/IRenderState
     (render-state [_ {:keys [c-board-control
                              add-new-column?]}]
@@ -75,7 +78,8 @@
                (om/build card-modal/card-modal-component %))
             (:columns data)))
          [:div.board-container
-          (om/build header/board-header (:board-info data) )
+
+          (om/build header/board-header (:board-info data) {:init-state {:c-board-control c-board-control}})
 
           [:div.yar
            (map
@@ -84,8 +88,9 @@
                                                        :n-columns (count (:columns data))}})
             (:columns data)
             (range))]
+
           [:div.add-column
            (if add-new-column?
              (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
              [:div {:on-click #(utils/toggle-component-state owner :add-new-column?)} "Add a list..."])]
-          (om/build sidebar/sidebar (:sidebar data))]]]))))
+          (om/build sidebar/sidebar-component (:sidebar data) {:init-state {:c-board-control c-board-control}})]]]))))

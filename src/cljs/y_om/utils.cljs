@@ -11,6 +11,10 @@
   ;; Send API req!
   (om/transact! data attribute #(not (attribute @data))))
 
+(defn toggle-component-global-state [data attribute]
+  ;; Send API req!
+  (om/transact! data attribute #(not (attribute @data))))
+
 (defn modal-center []
   (let [left (/ (- (.-innerWidth js/window) 300)
                        2)]
