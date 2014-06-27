@@ -7,6 +7,7 @@
    [om.core :as om :include-macros true]
    [om.dom :as dom :include-macros true]
    [sablono.core :as html :refer-macros [html]]
+   [om-tools.core :refer-macros [defcomponent]]
    [y-om.components.board-header :as header]
    [y-om.components.card :as card]
    [y-om.components.columns :as columns]
@@ -45,51 +46,48 @@
                                 button-text)
             [:a.close {:on-click #(utils/toggle-component-state owner state)} "Close"])))
 
-(defn board-view [data owner]
-  (reify
+(defcomponent board-component [data owner]
 
-    om/IInitState
-    (init-state [_]
-      {:c-board-control (chan)
-       :c-column-drag (chan)
-       :add-new-column? false})
+  (init-state [_]
+    {:c-board-control (chan)
+     :c-column-drag (chan)
+     :add-new-column? false})
 
-    om/IWillMount
-    (will-mount [_]
-      (let [c-board-control (om/get-state owner :c-board-control)]
-        (go (while true
-              (let [[msg-name command] (<! c-board-control)]
-                (condp = msg-name
-                  :move-column (move-column data command)
-                  :sidebar (om/transact! data [:sidebar :open] #(if (= command :open)
-                                                                  true
-                                                                  false))))))))
-    om/IRenderState
-    (render-state [_ {:keys [c-board-control
-                             add-new-column?]}]
-      (html
-       [:div
-        [:header]
-        [:div.container
-         (when (some true? (map #(get-in % [:state :card-modal :display]) (:columns data)))
-           (map
+  (will-mount [_]
+    (let [c-board-control (om/get-state owner :c-board-control)]
+      (go (while true
+            (let [[msg-name command] (<! c-board-control)]
+              (condp = msg-name
+                :move-column (move-column data command)
+                :sidebar (om/transact! data [:sidebar :open] #(if (= command :open)
+                                                                true
+                                                                false))))))))
+
+  (render-state [_ {:keys [c-board-control
+                           add-new-column?]}]
+    (html
+      [:div
+       [:header]
+       [:div.container
+        (when (some true? (map #(get-in % [:state :card-modal :display]) (:columns data)))
+          (map
             #(if (get-in % [:state :card-modal :display])
                (om/build card-modal/card-modal-component %))
             (:columns data)))
-         [:div.board-container
+        [:div.board-container
 
-          (om/build header/board-header (:board-info data) {:init-state {:c-board-control c-board-control}})
+         (om/build header/board-header (:board-info data) {:init-state {:c-board-control c-board-control}})
 
-          [:div.yar
-           (map
-            #(om/build columns/columns-view % {:init-state {:c-board-control c-board-control}
+         [:div.yar
+          (map
+            #(om/build columns/column-component % {:init-state {:c-board-control c-board-control}
                                                :state {:pos %2
                                                        :n-columns (count (:columns data))}})
             (:columns data)
             (range))]
 
-          [:div.add-column
-           (if add-new-column?
-             (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
-             [:div {:on-click #(utils/toggle-component-state owner :add-new-column?)} "Add a list..."])]
-          (om/build sidebar/sidebar-component (:sidebar data) {:init-state {:c-board-control c-board-control}})]]]))))
+         [:div.add-column
+          (if add-new-column?
+            (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
+            [:div {:on-click #(utils/toggle-component-state owner :add-new-column?)} "Add a list..."])]
+         (om/build sidebar/sidebar-component (:sidebar data) {:init-state {:c-board-control c-board-control}})]]])))

@@ -13,4 +13,4 @@
 
   (render [_]
     (dom/div
-      (om/build board/board-view data))))
+      (om/build board/board-component data))))

@@ -4,6 +4,7 @@
    [y-om.utils :as utils]
    [y-om.components.card :as card]
    [clojure.string :as string]
+   [om-tools.core :refer-macros [defcomponent]]
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]
    [om.dom :as dom :include-macros true]
@@ -50,52 +51,46 @@
             [:a.close {:on-click #(toggle-header data state)} "Close"])))
 
 
-(defn column-header [data owner]
-  (reify
+(defcomponent column-header-component [data owner]
 
-    om/IRender
-    (render [_]
-      (let [add-header? (get-in data [:state :add-header?])]
-        (html
-         (if add-header?
-           [:h4.column-header
-            (render-input owner data rename-column (:name data) [:state :add-header?] "header" "Save")]
-           [:h4.column-header {:on-click #(toggle-header data [:state :add-header?])} (:name data)]))))))
+  (render [_]
+    (let [add-header? (get-in data [:state :add-header?])]
+      (html
+        (if add-header?
+          [:h4.column-header
+           (render-input owner data rename-column (:name data) [:state :add-header?] "header" "Save")]
+          [:h4.column-header {:on-click #(toggle-header data [:state :add-header?])} (:name data)])))))
 
-(defn columns-view [data owner]
-  (reify
+(defcomponent column-component [data owner]
 
-    om/IInitState
-    (init-state [_]
-      {:c-column-control (chan)})
+  (init-state [_]
+    {:c-column-control (chan)})
 
-    om/IWillMount
-    (will-mount [_]
-      (let [c-column-control (om/get-state owner :c-column-control)]
-        (go (while true
-              (let [card-id (<! c-column-control)]
-                (om/update! data [:state :card-modal] {:display true :id card-id}))))))
+  (will-mount [_]
+    (let [c-column-control (om/get-state owner :c-column-control)]
+      (go (while true
+            (let [card-id (<! c-column-control)]
+              (om/update! data [:state :card-modal] {:display true :id card-id}))))))
 
-    om/IRenderState
-    (render-state [this {:keys [pos n-columns c-board-control c-column-control]}]
+  (render-state [this {:keys [pos n-columns c-board-control c-column-control]}]
 
-      (let [add-card? (get-in data [:state :add-card?])]
-        (html [:div.column {:on-mousedown #(om/set-state! owner :dragging true)}
+    (let [add-card? (get-in data [:state :add-card?])]
+      (html [:div.column {:on-mousedown #(om/set-state! owner :dragging true)}
 
-               (om/build column-header data)
+             (om/build column-header-component data)
 
-               (if (empty? (:cards data))
-                 [:div.empty-column]
-                 (apply dom/div #js {:id "yar"}
+             (if (empty? (:cards data))
+               [:div.empty-column]
+               (apply dom/div #js {:id "yar"}
 
-                        (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
-               [:div {:class (display? add-card?)}
-                (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add")]
-               [:div
-                [:a.add-card {:class (display? (not add-card?))
-                              :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."]]
-               [:div
-                (if (not= pos 0)
-                  [:a.left {:on-click #(put! c-board-control [:move-column {:pos pos :direction :left}])} "<<"])
-                (if (not= (+ 1 pos) n-columns)
-                  [:a.right {:on-click #(put! c-board-control [:move-column {:pos pos :direction :right}])} ">>"])]])))))
+                 (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
+             [:div {:class (display? add-card?)}
+              (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add")]
+             [:div
+              [:a.add-card {:class (display? (not add-card?))
+                            :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."]]
+             [:div
+              (if (not= pos 0)
+                [:a.left {:on-click #(put! c-board-control [:move-column {:pos pos :direction :left}])} "<<"])
+              (if (not= (+ 1 pos) n-columns)
+                [:a.right {:on-click #(put! c-board-control [:move-column {:pos pos :direction :right}])} ">>"])]]))))
