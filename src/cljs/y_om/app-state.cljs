@@ -12,17 +12,38 @@
                                                         :id 0}]
                                  :state {:add-header? false
                                          :add-card? false
-                                         :card-modal {:display true
-                                                      :id 0}}}
+                                         :card-modal {:display false
+                                                      :id 10}}}
                                 {:name "Doing" :cards [{:task "Drag Lists"
                                                         :id 1}
                                                        {:task "Drag Cards"
-                                                        :id 1}
+                                                        :id 2}
                                                        {:task "Make it look pretty"
-                                                        :id 1}
-                                                       {:task "Handle Resizing`"}]
-                                 :state {:add-header? true
-                                         :add-card? false}}
+                                                        :id 3}
+                                                       {:task "Handle Resizing"
+                                                        :id 10}
+                                                       {:task "placeholder"
+                                                        :id 11}
+                                                       {:task "placeholder"
+                                                        :id 12}
+                                                       {:task "placeholder"
+                                                        :id 13}
+                                                       {:task "placeholder"
+                                                        :id 14}
+                                                       {:task "placeholder"
+                                                        :id 15}
+                                                       {:task "placeholder"
+                                                        :id 16}
+                                                       {:task "placeholder"
+                                                        :id 17}
+                                                       {:task "placeholder"
+                                                        :id 18}]
+                                 :state {:add-header? false
+                                         :add-card? false
+                                         :card-modal {:display false
+                                                      :id 0}}}
                                 {:name "Done" :cards []
                                  :state {:add-header? false
-                                         :add-card? false}}]}))
+                                         :add-card? false
+                                         :card-modal {:display false
+                                                      :id 0}}}]}))
