@@ -9,6 +9,12 @@ goog.addDependency("../sablono/core.js", ['sablono.core'], ['goog.dom', 'sablono
 goog.addDependency("../om/dom.js", ['om.dom'], ['cljs.core']);
 goog.addDependency("../om/core.js", ['om.core'], ['cljs.core', 'om.dom', 'goog.ui.IdGenerator']);
 goog.addDependency("../y_om/utils.js", ['y_om.utils'], ['cljs.core', 'sablono.core', 'om.core', 'clojure.string']);
+goog.addDependency("../om_tools/dom.js", ['om_tools.dom'], ['cljs.core', 'om.dom', 'clojure.string']);
+goog.addDependency("../schema/utils.js", ['schema.utils'], ['goog.string', 'cljs.core', 'goog.string.format']);
+goog.addDependency("../schema/core.js", ['schema.core'], ['cljs.core', 'clojure.string', 'schema.utils']);
+goog.addDependency("../plumbing/fnk/schema.js", ['plumbing.fnk.schema'], ['schema.core', 'cljs.core', 'schema.utils']);
+goog.addDependency("../plumbing/core.js", ['plumbing.core'], ['cljs.core', 'plumbing.fnk.schema', 'schema.utils']);
+goog.addDependency("../om_tools/core.js", ['om_tools.core'], ['plumbing.core', 'cljs.core', 'om.core', 'plumbing.fnk.schema']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers']);
@@ -16,12 +22,6 @@ goog.addDependency("../cljs/core/async/impl/channels.js", ['cljs.core.async.impl
 goog.addDependency("../cljs/core/async/impl/ioc_helpers.js", ['cljs.core.async.impl.ioc_helpers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.timers']);
-goog.addDependency("../om_tools/dom.js", ['om_tools.dom'], ['cljs.core', 'om.dom', 'clojure.string']);
-goog.addDependency("../schema/utils.js", ['schema.utils'], ['goog.string', 'cljs.core', 'goog.string.format']);
-goog.addDependency("../schema/core.js", ['schema.core'], ['cljs.core', 'clojure.string', 'schema.utils']);
-goog.addDependency("../plumbing/fnk/schema.js", ['plumbing.fnk.schema'], ['schema.core', 'cljs.core', 'schema.utils']);
-goog.addDependency("../plumbing/core.js", ['plumbing.core'], ['cljs.core', 'plumbing.fnk.schema', 'schema.utils']);
-goog.addDependency("../om_tools/core.js", ['om_tools.core'], ['plumbing.core', 'cljs.core', 'om.core', 'plumbing.fnk.schema']);
 goog.addDependency("../y_om/components/card.js", ['y_om.components.card'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'cljs.core.async', 'om.core', 'y_om.utils']);
 goog.addDependency("../y_om/components/columns.js", ['y_om.components.columns'], ['cljs.core', 'om.dom', 'cljs.core.async', 'sablono.core', 'om.core', 'clojure.string', 'y_om.utils', 'y_om.components.card']);
 goog.addDependency("../y_om/components/sidebar.js", ['y_om.components.sidebar'], ['cljs.core', 'om.dom', 'cljs.core.async', 'sablono.core', 'om.core']);
@@ -29,6 +29,6 @@ goog.addDependency("../y_om/components/board_header.js", ['y_om.components.board
 goog.addDependency("../y_om/app_state.js", ['y_om.app_state'], ['cljs.core']);
 goog.addDependency("../y_om/components/card_modal.js", ['y_om.components.card_modal'], ['cljs.core', 'om.dom', 'sablono.core', 'om.core', 'y_om.utils']);
 goog.addDependency("../y_om/components/board.js", ['y_om.components.board'], ['y_om.components.columns', 'y_om.components.sidebar', 'cljs.core', 'om.dom', 'cljs.core.async', 'sablono.core', 'y_om.components.board_header', 'y_om.app_state', 'om.core', 'y_om.components.card_modal', 'y_om.utils', 'y_om.components.card']);
-goog.addDependency("../y_om/components/app.js", ['y_om.components.app'], ['cljs.core', 'cljs.core.async', 'sablono.core', 'om.core', 'y_om.components.board']);
+goog.addDependency("../y_om/components/app.js", ['y_om.components.app'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'cljs.core.async', 'om.core', 'y_om.components.board']);
 goog.addDependency("../ankha/core.js", ['ankha.core'], ['cljs.core', 'om.dom', 'goog.object', 'om.core', 'clojure.string']);
 goog.addDependency("../y_om/core.js", ['y_om.core'], ['y_om.components.app', 'ankha.core', 'cljs.core', 'cljs.core.async', 'sablono.core', 'y_om.app_state', 'om.core', 'y_om.utils']);

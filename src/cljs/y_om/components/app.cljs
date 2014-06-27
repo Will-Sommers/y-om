@@ -3,14 +3,14 @@
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]
-   [sablono.core :as html :refer-macros [html]]
+   [om-tools.core :refer-macros [defcomponent]]
+   [om-tools.dom :as dom :include-macros true]
    [y-om.components.board :as board]))
 
 (enable-console-print!)
 
-(defn app-component [data owner]
-  (reify
-    om/IRender
-    (render [_]
-      (html [:div
-             (om/build board/board-view data)]))))
+(defcomponent app-component [data owner]
+
+  (render [_]
+    (dom/div
+      (om/build board/board-view data))))
