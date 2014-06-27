@@ -22,7 +22,6 @@
       (let [next-id (->> (:cards @data)
                   last
                   :id)]
-        (println next-id)
         (om/transact! data :cards #(conj % {:task text :id next-id}))
         (set! (.-value element) "")
         (utils/toggle-component-state owner state)))))
