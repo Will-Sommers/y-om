@@ -18,10 +18,14 @@
 (defn submit-card [owner data state ref]
   (let [element (om/get-node owner ref)
         text (. element -value)]
-    (if-not (string/blank? text)
-      (do (om/transact! data :cards #(conj % {:task text}))
-          (set! (.-value element) "")
-          (utils/toggle-component-state owner state)))))
+    (when (not (string/blank? text))
+      (let [next-id (->> (:cards @data)
+                  last
+                  :id)]
+        (println next-id)
+        (om/transact! data :cards #(conj % {:task text :id next-id}))
+        (set! (.-value element) "")
+        (utils/toggle-component-state owner state)))))
 
 (defn rename-column [owner data state ref]
   (let [element (om/get-node owner ref)
