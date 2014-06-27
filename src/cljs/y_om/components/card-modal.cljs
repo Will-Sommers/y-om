@@ -16,7 +16,7 @@
          [:div.overlay
           [:div.modal {:style {:top "100px"
                                :left "300px"}}
-           [:a.close {:on-click #(om/transact! data :display (fn [_] false))} "Close"]
+           [:a.close {:on-click #(om/transact! data [:state :card-modal :display] (fn [_] false))} "Close"]
            [:input {:on-change #(let [new-val (.. % -target -value)]
                                   (om/transact! card :task (fn [_] new-val)))
                     :default-value (:task card)}]]])))))

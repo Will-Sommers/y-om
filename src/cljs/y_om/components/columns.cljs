@@ -1,4 +1,5 @@
 (ns y-om.components.columns
+  (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:require
    [y-om.utils :as utils]
    [y-om.components.cards :as cards]
@@ -61,8 +62,19 @@
 (defn columns-view [data owner]
   (reify
 
+    om/IInitState
+    (init-state [_]
+      {:c-column-control (chan)})
+
+    om/IWillMount
+    (will-mount [_]
+      (let [c-column-control (om/get-state owner :c-column-control)]
+        (go (while true
+              (let [card-id (<! c-column-control)]
+                (om/update! data [:state :card-modal] {:display true :id card-id}))))))
+
     om/IRenderState
-    (render-state [this {:keys [pos n-columns c-board-control]}]
+    (render-state [this {:keys [pos n-columns c-board-control c-column-control]}]
 
       (let [add-card? (get-in data [:state :add-card?])]
         (html [:div.column {:on-mousedown #(om/set-state! owner :dragging true)}
@@ -73,7 +85,7 @@
                  [:div.empty-column]
                  (apply dom/div #js {:id "yar"}
 
-                        (om/build-all cards/card-view (:cards data) {:init-state {:pos 1}})))
+                        (om/build-all cards/card-view (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
                [:div {:class (display? add-card?)}
                 (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add")]
                [:div

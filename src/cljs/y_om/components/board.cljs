@@ -30,8 +30,7 @@
         text (. element -value)]
     (om/transact! data
                   :columns
-                  #(conj % {:name text :cards []})
-                  :testing)
+                  #(conj % {:name text :cards []}))
     (utils/toggle-component-state owner state)))
 
 (defn render-input [owner data submit-fn val state ref button-text]
