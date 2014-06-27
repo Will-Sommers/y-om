@@ -16,7 +16,7 @@
   :source-paths ["src"]
 
   :cljsbuild {
-              :builds [{:id "draw-me"
+              :builds [{:id "dev"
                         :source-paths ["src"]
                         :compiler {
                                    :output-to "draw_me.js"

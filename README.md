@@ -1,14 +1,17 @@
 # y-om
 
-A Clojure library designed to ... well, that part is up to you.
+Let's show off some of what Om can do.
 
-## Usage
+# Getting Started
 
-FIXME
+Have [Leiningen](https://github.com/technomancy/leiningen) installed.
 
-## License
+```
+lein cljsbuild auto dev
+```
 
-Copyright © 2014 FIXME
+Then open the index.html file and go to town.
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+# Starting up a REPL
+
+Help? Bueller?
