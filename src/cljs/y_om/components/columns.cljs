@@ -85,7 +85,7 @@
                  [:div.empty-column]
                  (apply dom/div #js {:id "yar"}
 
-                        (om/build-all cards/card-view (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
+                        (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
                [:div {:class (display? add-card?)}
                 (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add")]
                [:div

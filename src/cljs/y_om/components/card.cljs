@@ -1,4 +1,4 @@
-(ns y-om.components.cards
+(ns y-om.components.card
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
