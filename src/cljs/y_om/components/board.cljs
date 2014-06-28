@@ -50,6 +50,9 @@
 
 (defcomponent board-component [data owner]
 
+  (display-name [_]
+    "Board")
+
   (init-state [_]
     {:c-board-control (chan)
      :c-column-drag (chan)

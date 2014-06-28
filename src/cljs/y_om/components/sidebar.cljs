@@ -14,6 +14,9 @@
 
 (defcomponent sidebar-component [data owner]
 
+  (display-name [_]
+    "Sidebar")
+
   (render-state [_ {:keys [c-board-control]}]
     (dom/div
       (dom/nav {:class (get-class (:open data))

@@ -19,6 +19,9 @@
     (om/transact! data [:state :card-modal :display] (fn [_] false))))
 
 (defcomponent card-modal-component [data owner]
+  (display-name [_]
+    "Card Modal")
+
   (init-state [_]
     {:valid? true})
 

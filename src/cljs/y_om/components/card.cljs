@@ -9,6 +9,9 @@
 
 (defcomponent card-component [data owner]
 
+  (display-name [_]
+    "Card")
+
   (init-state [_]
     {:c-drag-card (chan)
      :dragging false})

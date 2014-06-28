@@ -10,6 +10,8 @@
 (enable-console-print!)
 
 (defcomponent app-component [data owner]
+  (display-name [_]
+    "App")
 
   (render [_]
     (dom/div

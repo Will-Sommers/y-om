@@ -9,6 +9,9 @@
 
 (defcomponent board-header [data owner]
 
+  (display-name [_]
+    "Board Header")
+
   (render-state [_ {:keys [c-board-control]}]
     (dom/div {:class "board-header"}
       (dom/h3 (:board-name data))
