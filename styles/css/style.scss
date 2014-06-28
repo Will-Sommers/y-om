@@ -172,6 +172,15 @@ h5, h4, h3 {
   top: 0px;
   right: 0px;
   background-color: #ccc;
+  visibility: visible;
+  transition: all 0.5s;
+}
+
+.sidebar-open {
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.sidebar-closed {
+  -webkit-transform: translate3d(100%, 0, 0);
 }
 
 #ankha-header {

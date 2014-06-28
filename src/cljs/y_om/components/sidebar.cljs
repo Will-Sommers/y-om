@@ -7,11 +7,14 @@
    [om-tools.core :refer-macros [defcomponent]]))
 
 
+(defn get-class [open?]
+  (if open?
+    "sidebar sidebar-open"
+    "sidebar sidebar-closed"))
+
 (defcomponent sidebar-component [data owner]
 
   (render-state [_ {:keys [c-board-control]}]
-    (if (:open data)
-      (dom/div
-        (dom/div {:class "sidebar"
-                  :on-click #(put! c-board-control [:sidebar :close])} "Close"))
-      (dom/div "hi"))))
+    (dom/div
+      (dom/nav {:class (get-class (:open data))
+                :on-click #(put! c-board-control [:sidebar :close])} "Close"))))
