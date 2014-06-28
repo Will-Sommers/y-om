@@ -54,6 +54,9 @@
 
 (defcomponent column-header-component [data owner]
 
+  (display-name [_]
+    "Column Header")
+
   (render [_]
     (let [add-header? (get-in data [:state :add-header?])]
       (dom/div (if add-header?
@@ -63,6 +66,9 @@
                           :on-click #(toggle-state data [:state :add-header?])} (:name data)))))))
 
 (defcomponent column-component [data owner]
+
+  (display-name [_]
+    "Column")
 
   (init-state [_]
     {:c-column-control (chan)})
