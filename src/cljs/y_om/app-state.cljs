@@ -5,11 +5,11 @@
                                    :private false}
                       :sidebar {:open true}
                       :columns [{:name "To Do" :cards [{:task "Sidebar"
-                                                        :id 3}
+                                                        :id 0}
                                                        {:task "Header"
-                                                        :id 10}
+                                                        :id 1}
                                                        {:task "Create new board"
-                                                        :id 0}]
+                                                        :id 2}]
                                  :state {:add-header? false
                                          :add-card? false
                                          :card-modal {:display false
@@ -21,23 +21,23 @@
                                                        {:task "Make it look pretty"
                                                         :id 3}
                                                        {:task "Handle Resizing"
+                                                        :id 4}
+                                                       {:task "placeholder"
+                                                        :id 5}
+                                                       {:task "placeholder"
+                                                        :id 6}
+                                                       {:task "placeholder"
+                                                        :id 7}
+                                                       {:task "placeholder"
+                                                        :id 8}
+                                                       {:task "placeholder"
+                                                        :id 9}
+                                                       {:task "placeholder"
                                                         :id 10}
                                                        {:task "placeholder"
                                                         :id 11}
                                                        {:task "placeholder"
-                                                        :id 12}
-                                                       {:task "placeholder"
-                                                        :id 13}
-                                                       {:task "placeholder"
-                                                        :id 14}
-                                                       {:task "placeholder"
-                                                        :id 15}
-                                                       {:task "placeholder"
-                                                        :id 16}
-                                                       {:task "placeholder"
-                                                        :id 17}
-                                                       {:task "placeholder"
-                                                        :id 18}]
+                                                        :id 12}]
                                  :state {:add-header? false
                                          :add-card? false
                                          :card-modal {:display false
