@@ -25,7 +25,7 @@
                   :id)]
         (om/transact! data :cards #(conj % {:task text :id next-id}))
         (set! (.-value element) "")
-        (utils/toggle-component-state owner state)))))
+        (om/update! data [:state :add-card?] false)))))
 
 (defn rename-column [owner data state ref]
   (let [element (om/get-node owner ref)
@@ -84,11 +84,14 @@
           (dom/div {:class "empty-column"})
           (dom/div
             (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}})))
+
         (dom/div {:class (display? add-card?)}
           (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add"))
+
         (dom/div
           (dom/a {:class (str "add-card " (display? (not add-card?)))
                   :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."))
+
         (dom/div nil
           (if (not= pos 0)
             (dom/a {:class "left"
