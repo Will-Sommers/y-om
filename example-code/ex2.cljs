@@ -16,10 +16,12 @@
   (reify
     om/IRender
     (render [_]
-      (apply dom/div nil
-        (om/build-all column-component (:columns data))))))
+      (dom/div nil
+        (dom/div nil (:board-name data))
+        (apply dom/div nil
+          (om/build-all column-component (:columns data)))))))
 
 (om/root
   app-component
-  app-states
+  app-state
   {:target (. js/document (getElementById "app"))})
