@@ -25,7 +25,7 @@
                   :id)
             id (if (nil? next-id)
                  0
-                 next-id)]
+                 (inc next-id))]
         (om/transact! data :cards #(conj % {:task text :id id}))
         (set! (.-value element) "")
         (om/update! data [:state :add-card?] false)))))
