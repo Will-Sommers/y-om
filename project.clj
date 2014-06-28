@@ -19,7 +19,7 @@
               :builds [{:id "dev"
                         :source-paths ["src"]
                         :compiler {
-                                   :output-to "draw_me.js"
+                                   :output-to "y_om.js"
                                    :output-dir "out"
                                    :optimizations :none
                                    :source-map true}}]})
