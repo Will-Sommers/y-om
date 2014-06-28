@@ -32,3 +32,10 @@
                                 params)))]
     (if (= "1" (get params-hash "ankha"))
       true)))
+
+
+(defn log [to-be-logged]
+  (.log js/console to-be-logged))
+
+(defn timeout [callback length]
+  (js/setTimeout callback length))
