@@ -22,8 +22,11 @@
     (when (not (string/blank? text))
       (let [next-id (->> (:cards @data)
                   last
-                  :id)]
-        (om/transact! data :cards #(conj % {:task text :id next-id}))
+                  :id)
+            id (if (nil? next-id)
+                 0
+                 next-id)]
+        (om/transact! data :cards #(conj % {:task text :id id}))
         (set! (.-value element) "")
         (om/update! data [:state :add-card?] false)))))
 
