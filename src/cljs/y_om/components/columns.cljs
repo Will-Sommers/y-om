@@ -77,7 +77,9 @@
     {:c-column-control (chan)})
 
   (will-mount [_]
-    (let [c-column-control (om/get-state owner :c-column-control)]
+    (let [c-column-control (om/get-state owner :c-column-control)
+          dragging? (om/get-state owner :dragging?)]
+
       (go (while true
             (let [card-id (<! c-column-control)]
               (om/update! data [:state :card-modal] {:display true :id card-id}))))))
@@ -91,36 +93,49 @@
                               c-board-control
                               c-column-control
                               board-height
-                              column-height]}]
+                              column-height
+                              drag-over?]}]
+
     (let [add-card? (get-in data [:state :add-card?])]
-      (dom/div {:class "column"
-                :on-mousedown #(om/set-state! owner :dragging true)}
-        (om/build column-header-component data)
+      (if drag-over?
+        (dom/div {:class "placeholder-column"
+                  :style {:height "150"}
+                  :on-drag-leave #(om/set-state! owner :drag-over? false)})
+        (dom/div {:class "column"
+                  :ref "column"
+                  :draggable true
+                  :on-drag-start #(utils/log %)
+                  :on-drag-enter #(do
+                                   (utils/log %)
+                                   (om/set-state! owner :drag-over? true))
+                  :on-drag-leave #(pr "test")
+                  :on-drag-end #(pr "done")}
+             (om/build column-header-component data)
 
-        (dom/div {:class "card-container"
-                  :ref (:name data)
-                  :style (if (> column-height board-height)
-                           #js {:height board-height
-                                :min-height "150px"
-                                :overflow-y "scroll"}
-                           #js {})}
-          (if (empty? (:cards data))
-            (dom/div {:class "empty-column"})
-            (dom/div
-              (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}}))))
+             (dom/div {:class "card-container"
+                       :ref (:name data)
+                       :style (if (> column-height board-height)
+                                #js {:height board-height
+                                     :min-height "150px"
+                                     :overflow-y "scroll"}
+                                #js {})}
+               (if (empty? (:cards data))
+                 (dom/div {:class "empty-column"})
+                 (dom/div
+                   (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}}))))
 
-        (dom/div {:class (display? add-card?)}
-          (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add"))
+             (dom/div {:class (display? add-card?)}
+               (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add"))
 
-        (dom/div
-          (dom/a {:class (str "add-card " (display? (not add-card?)))
-                  :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."))
+             (dom/div
+               (dom/a {:class (str "add-card " (display? (not add-card?)))
+                       :on-click #(om/update! data [:state :add-card?] true)} "Add a new card..."))
 
-        (dom/div nil
-          (if (not= pos 0)
-            (dom/a {:class "left"
-                    :on-click #(put! c-board-control [:move-column {:pos pos :direction :left}])} "<<"))
+             (dom/div nil
+               (if (not= pos 0)
+                 (dom/a {:class "left"
+                         :on-click #(put! c-board-control [:move-column {:pos pos :direction :left}])} "<<"))
 
-          (if (not= (+ 1 pos) n-columns)
-            (dom/a {:class "right"
-                    :on-click #(put! c-board-control [:move-column {:pos pos :direction :right}])} ">>")))))))
+               (if (not= (+ 1 pos) n-columns)
+                 (dom/a {:class "right"
+                         :on-click #(put! c-board-control [:move-column {:pos pos :direction :right}])} ">>"))))))))

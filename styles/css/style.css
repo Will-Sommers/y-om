@@ -11,39 +11,42 @@ html {
   background-color: #1C9C42;
   position: relative; }
 
-.column {
+.column-container, .add-column, .column {
+  display: inline-block;
+  vertical-align: top; }
+
+.column, .add-column, .placeholder-column {
   width: 200px;
+  padding: 10px;
+  display: inline-block; }
+
+.placeholder-column {
   background-color: #ccc;
-  padding: 10px; }
+  margin-right: 5px; }
+
+.column {
+  background-color: #ccc;
+  margin-right: 5px; }
+  .column .column-header {
+    margin-bottom: 10px;
+    cursor: -webkit-grab; }
+  .column .empty-column {
+    height: 20px; }
 
 .add-column {
-  margin-left: 5px;
-  width: 200px;
-  display: inline-block;
-  padding: 10px;
   background-color: #0F661F;
-  -webkit-transition: background-color, 500s, ease-in, 1000;
-  -moz-transition: background-color, 500s, ease-in, 1000;
-  -ms-transition: background-color, 500s, ease-in, 1000;
-  transition: background-color, 500s, ease-in, 1000; }
+  -webkit-transition: background-color, 500s, ease-in, 500;
+  -moz-transition: background-color, 500s, ease-in, 500;
+  -ms-transition: background-color, 500s, ease-in, 500;
+  transition: background-color, 500s, ease-in, 500; }
   .add-column:hover {
     background-color: #0c5018; }
-
-.column-header {
-  margin-bottom: 10px;
-  cursor: -webkit-grab; }
-
-.column:not(:first-child) {
-  margin-left: 5px; }
 
 .hide {
   display: none; }
 
 .open-add-card {
   color: #787878; }
-
-.empty-column {
-  height: 20px; }
 
 .list-card {
   background-color: white;
@@ -121,10 +124,6 @@ header {
   color: #E9ED72;
   font-size: 18px;
   padding-right: 0.5em; }
-
-.column-container, .add-column, .column {
-  display: inline-block;
-  vertical-align: top; }
 
 .board-header {
   color: white;

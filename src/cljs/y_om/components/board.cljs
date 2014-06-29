@@ -74,11 +74,11 @@
     (dom/div
       (dom/header " ")
       (dom/div {:class "container"}
-        (when (some true? (map #(get-in % [:state :card-modal :display]) (:columns data)))
-          (map
-            #(if (get-in % [:state :card-modal :display])
-               (om/build card-modal/card-modal-component %))
-            (:columns data)))
+        (when (some true? (map #(get-in % [:state :card-modal :display]) (:columns data))
+                (map
+                  #(if (get-in % [:state :card-modal :display])
+                     (om/build card-modal/card-modal-component %))
+                  (:columns data))))
         (dom/div {:class "board-container"}
           (om/build header/board-header (:board-info data) {:init-state {:c-board-control
                                                                          c-board-control}})
@@ -89,7 +89,8 @@
                                                              :pos %2
                                                              :n-columns (count (:columns data))}})
               (:columns data)
-              (range)))
+              (range))
+            #_(dom/div {:class "placeholder-column"} "hi"))
           (dom/div {:class "add-column"}
             (if add-new-column?
               (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
