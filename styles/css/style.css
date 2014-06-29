@@ -21,7 +21,11 @@ html {
   width: 200px;
   display: inline-block;
   padding: 10px;
-  background-color: #0F661F; }
+  background-color: #0F661F;
+  -webkit-transition: background-color, 500s, ease-in, 1000;
+  -moz-transition: background-color, 500s, ease-in, 1000;
+  -ms-transition: background-color, 500s, ease-in, 1000;
+  transition: background-color, 500s, ease-in, 1000; }
   .add-column:hover {
     background-color: #0c5018; }
 
@@ -146,10 +150,16 @@ h5, h4, h3 {
   transition: all 0.5s; }
 
 .sidebar-open {
-  -webkit-transform: translate3d(0, 0, 0); }
+  -webkit-transform: translate3d(0%, 0, 0);
+  -moz-transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0); }
 
 .sidebar-closed {
-  -webkit-transform: translate3d(100%, 0, 0); }
+  -webkit-transform: translate3d(100%, 0, 0);
+  -moz-transform: translate3d(100%, 0, 0);
+  -ms-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0); }
 
 #ankha-header {
   background-color: #ccc;

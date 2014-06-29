@@ -1,3 +1,5 @@
+@import "functions";
+
 body {
   margin: 0px;
 }
@@ -26,6 +28,7 @@ html {
   display: inline-block;
   padding: 10px;
   background-color: #0F661F;
+  @include transition(background-color, 500s, ease-in, 1000);
   &:hover {
     background-color: darken(#0F661F, 5%);
     }
@@ -180,10 +183,11 @@ h5, h4, h3 {
 }
 
 .sidebar-open {
-  -webkit-transform: translate3d(0, 0, 0);
+  @include transform(0%, 0, 0);
 }
+
 .sidebar-closed {
-  -webkit-transform: translate3d(100%, 0, 0);
+  @include transform(100%, 0, 0);
 }
 
 #ankha-header {
