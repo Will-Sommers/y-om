@@ -16,7 +16,6 @@ html {
 
 .column {
   width: 200px;
-  float: left;
   background-color: #ccc;
   padding: 10px;
 }
@@ -24,7 +23,7 @@ html {
 .add-column {
   margin-left:5px;
   width: 200px;
-  float: left;
+  display: inline-block;
   padding: 10px;
   background-color: #0F661F;
   &:hover {
@@ -147,6 +146,10 @@ header {
   padding-right: 0.5em;
 }
 
+.column-container, .add-column, .column {
+  display: inline-block;
+  vertical-align: top;
+}
 
 .board-header {
   color: white;
