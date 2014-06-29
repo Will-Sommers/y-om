@@ -69,7 +69,8 @@
                                                                 false))))))))
 
   (render-state [_ {:keys [c-board-control
-                           add-new-column?]}]
+                           add-new-column?
+                           board-height]}]
     (dom/div
       (dom/header " ")
       (dom/div {:class "container"}
@@ -81,16 +82,17 @@
         (dom/div {:class "board-container"}
           (om/build header/board-header (:board-info data) {:init-state {:c-board-control
                                                                          c-board-control}})
-          (dom/div
+          (dom/div {:class "column-container"}
             (map
               #(om/build columns/column-component % {:init-state {:c-board-control c-board-control}
-                                                     :state {:pos %2
+                                                     :state {:board-height board-height
+                                                             :pos %2
                                                              :n-columns (count (:columns data))}})
               (:columns data)
-              (range))))
-        (dom/div {:class "add-column"}
-          (if add-new-column?
-            (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
-            (dom/div {:on-click #(utils/toggle-component-state owner :add-new-column?)} "Add a list...")))
-        (om/build sidebar/sidebar-component (:sidebar data) {:init-state {:c-board-control c-board-control}})))
+              (range)))
+          (dom/div {:class "add-column"}
+            (if add-new-column?
+              (render-input owner data add-column "" :add-new-column?  "add-column" "Save")
+              (dom/div {:on-click #(utils/toggle-component-state owner :add-new-column?)} "Add a list...")))
+          (om/build sidebar/sidebar-component (:sidebar data) {:init-state {:c-board-control c-board-control}}))))
     ))
