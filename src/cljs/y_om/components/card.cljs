@@ -13,6 +13,10 @@
     "Card")
 
   (render-state [_ {:keys [c-column-control]}]
-    (dom/div {:class "list-card"
-              :on-click #(put! c-column-control (:id @data))}
-      (dom/div (:task data)))))
+    (dom/div {:class "yar"}
+      (dom/div {:class "list-card"
+                :on-click #(put! c-column-control (:id @data))}
+        (dom/div (:task data)))
+      (dom/div {:class "edit-card"
+                :on-click #(utils/log "show editor")}
+        (dom/div {:class "fa fa-pencil"})))))

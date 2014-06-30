@@ -81,8 +81,28 @@ html {
   margin-bottom: 5px;
   font-size: 12px;
   color: #474747;
+
+}
+
+  .edit-card {
+    display: none;
+    float: right;
+    margin-top: -27px;
+    margin-right: 0px;
+    width: 20px;
+    height: 20px;
+    color: #ccc;
+    }
+
+.yar {
   &:hover {
     background-color: #f5f5f5;
+    .edit-card {
+      display: block;
+      &:hover {
+        color: #4F4F4F;
+        }
+      }
     }
 }
 
