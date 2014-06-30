@@ -24,6 +24,10 @@ html {
   background-color: #ccc;
   margin-right: 5px; }
 
+.cw {
+  display: inline-block;
+  vertical-align: top; }
+
 .column {
   background-color: #ccc;
   margin-right: 5px; }

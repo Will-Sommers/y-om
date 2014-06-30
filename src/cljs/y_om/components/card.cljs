@@ -12,18 +12,7 @@
   (display-name [_]
     "Card")
 
-  (init-state [_]
-    {:c-drag-card (chan)
-     :dragging false})
-
-  (will-mount [_]
-    (let [c-drag-card (om/get-state owner :c-drag-card)]
-      (go (while true
-            (let [pos (<! c-drag-card)]
-              )))))
-
-  (render-state [_ {:keys [dragging c-drag-card]}]
-    (let [c-column-control (om/get-state owner :c-column-control)]
-      (dom/div {:class "list-card"
-                :on-click #(if-not dragging (put! c-column-control (:id @data)))}
-        (dom/div (:task data))))))
+  (render-state [_ {:keys [c-column-control]}]
+    (dom/div {:class "list-card"
+              :on-click #(put! c-column-control (:id @data))}
+      (dom/div (:task data)))))

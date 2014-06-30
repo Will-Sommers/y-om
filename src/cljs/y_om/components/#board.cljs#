@@ -89,7 +89,7 @@
                   (om/build columns/column-component data {:init-state {:c-board-control c-board-control}
                                                            :state {:board-height board-height
                                                                    :pos pos
-                                                                   :n-columns column-count}}))
+                                                                   :n-columns column-countb}}))
                 (:columns data)
                 (range)))
             (dom/div {:class "add-column"}
