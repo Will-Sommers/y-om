@@ -9,15 +9,24 @@
                  [om "0.6.4"]
                  [prismatic/om-tools "0.2.2"]
                  [ankha "0.1.1"]
-                 [sablono "0.2.17"]]
+                 [sablono "0.2.17"]
+                 [com.cemerick/piggieback "0.1.3"]
+                 [weasel "0.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]]
+
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
+  :injections [(require 'cemerick.piggieback 'weasel.repl.websocket)
+               (defn browser-repl []
+                 (cemerick.piggieback/cljs-repl
+                   :repl-env (weasel.repl.websocket/repl-env :port 9001)))]
 
   :source-paths ["src"]
 
   :cljsbuild {
               :builds [{:id "dev"
-                        :source-paths ["src"]
+                        :source-paths ["src" "dev"]
                         :compiler {
                                    :output-to "y_om.js"
                                    :output-dir "out"
