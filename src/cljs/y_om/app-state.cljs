@@ -4,6 +4,7 @@
                                    :starred false
                                    :private false}
                       :sidebar {:open true}
+                      :modal {:cursor nil}
                       :columns [{:name "To Do" :cards [{:task "Sidebar"
                                                         :id 0}
                                                        {:task "Header"
@@ -11,9 +12,7 @@
                                                        {:task "Create new board"
                                                         :id 2}]
                                  :state {:add-header? false
-                                         :add-card? false
-                                         :card-modal {:display false
-                                                      :id 10}}}
+                                         :add-card? false}}
                                 {:name "Doing" :cards [{:task "Drag Lists"
                                                         :id 1}
                                                        {:task "Drag Cards"
@@ -39,11 +38,7 @@
                                                        {:task "placeholder"
                                                         :id 12}]
                                  :state {:add-header? false
-                                         :add-card? false
-                                         :card-modal {:display false
-                                                      :id 0}}}
+                                         :add-card? false}}
                                 {:name "Done" :cards []
                                  :state {:add-header? false
-                                         :add-card? false
-                                         :card-modal {:display false
-                                                      :id 0}}}]}))
+                                         :add-card? false}}]}))

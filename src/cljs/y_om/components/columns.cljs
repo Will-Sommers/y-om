@@ -74,18 +74,6 @@
   (display-name [_]
     "Column")
 
-  (init-state [_]
-    {:c-column-control (chan)})
-
-  (will-mount [_]
-    (let [c-column-control (om/get-state owner :c-column-control)
-          dragging? (om/get-state owner :dragging?)]
-
-      (go (while true
-            (let [card-id (<! c-column-control)]
-              (om/update! data [:state :card-modal] {:display true :id card-id})
-)))))
-
   (did-mount [_]
     ;; kludge
     (om/set-state! owner :column-height (- (.. (om/get-node owner (:name data)) -clientHeight) 100)))
@@ -93,10 +81,8 @@
   (render-state [this {:keys [pos
                               n-columns
                               c-board-control
-                              c-column-control
                               board-height
                               column-height]}]
-
     (let [add-card? (get-in data [:state :add-card?])]
       (dom/div {:class "column"
                 :ref "column"
@@ -115,7 +101,8 @@
             (if (empty? (:cards data))
               (dom/div {:class "empty-column"})
               (dom/div
-                (om/build-all card/card-component (:cards data) {:init-state {:pos 1 :c-column-control c-column-control}}))))
+                (om/build-all card/card-component (:cards data) {:init-state {:pos 1
+                                                                              :c-board-control c-board-control}}))))
 
           (dom/div {:class (display? add-card?)}
             (render-input owner data submit-card "" [:state :add-card?] "add-card" "Add"))

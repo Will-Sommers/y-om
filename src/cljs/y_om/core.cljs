@@ -4,6 +4,7 @@
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [om.core :as om :include-macros true]
    [sablono.core :as html :refer-macros [html]]
+   [y-om.components.card-modal :as modal]
    [y-om.app-state :as app-state]
    [y-om.utils :as utils]
    [y-om.components.app :as app]
@@ -24,6 +25,11 @@
      app/app-component
      app-state
      {:target (. js/document (getElementById "app"))})
+
+    (om/root
+      modal/card-modal-component
+      app-state
+      {:target (. js/document (getElementById "modal"))})
 
     (if options
       (om/root

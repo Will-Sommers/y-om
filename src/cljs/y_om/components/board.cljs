@@ -3,7 +3,7 @@
   (:require
    [cljs.core.async :as async :refer [>! <! alts! chan sliding-buffer put! close!]]
    [y-om.app-state :as app-state]
-   [y-om.utils :as utils]
+   [y-om.utils :as utils :refer [log]]
    [om.core :as om :include-macros true]
    [sablono.core :as html :refer-macros [html]]
    [om-tools.core :refer-macros [defcomponent]]
@@ -63,6 +63,7 @@
       (go (while true
             (let [[msg-name command] (<! c-board-control)]
               (condp = msg-name
+                :update-modal (om/update! data :modal {:cursor command})
                 :move-column (move-column data command)
                 :sidebar (om/transact! data [:sidebar :open] #(if (= command :open)
                                                                 true
@@ -75,11 +76,6 @@
       (dom/div
         (dom/header " ")
         (dom/div {:class "container"}
-          (when (some true? (map #(get-in % [:state :card-modal :display]) (:columns data)))
-            (map
-              #(when (get-in % [:state :card-modal :display])
-                 (om/build card-modal/card-modal-component %))
-              (:columns data)))
           (dom/div {:class "board-container"}
             (om/build header/board-header (:board-info data) {:init-state {:c-board-control
                                                                            c-board-control}})

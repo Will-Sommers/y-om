@@ -16,30 +16,29 @@
     (do
       (utils/timeout #(om/set-state! owner :valid? true) 1500)
       (om/set-state! owner :valid? false))
-    (om/transact! data [:state :card-modal :display] (fn [_] false))))
+    (om/update! data :modal {:cursor nil})))
 
 (defcomponent card-modal-component [data owner]
   (display-name [_]
     "Card Modal")
-
   (init-state [_]
     {:valid? true})
 
   (render-state [_ {:keys [valid?]}]
-    (let [selected-card-id (get-in data [:state :card-modal :id])
-          card (first (filter #(= selected-card-id (:id %)) (:cards data)))]
-
-      (dom/div {:class "overlay"
-                :on-click #(hide-modal card % data owner)}
-        (dom/div {:class "modal"
-                  :style {:top "100px"
-                          :left "300px"}}
-          (dom/a  {:class "close"
-                   :on-click #(hide-modal card % data owner)} "Close")
-          (dom/input {:on-change #(let [new-val (.. % -target -value)]
-                                    (om/transact! card :task (fn [_] new-val)))
-                      :on-key-down #(if (= 13 (.. % -keyCode))
-                                        (hide-modal card % data owner))
-                      :default-value (:task card)})
-          (if-not valid?
-            (dom/div "Cannot have a card without text")))))))
+    (dom/div
+      (if-let [modal-cursor (get-in data [:modal :cursor])]
+        (dom/div {:class "overlay"
+                  :on-click #(hide-modal modal-cursor % data owner)}
+          (dom/div {:class "modal"
+                    :style {:top "100px"
+                            :left "300px"}}
+            (dom/a  {:class "close"
+                     :on-click #(hide-modal modal-cursor % data owner)} "Close")
+            (dom/input {:on-change #(let [new-val (.. % -target -value)]
+                                      (om/transact! modal-cursor :task (fn [_] new-val)))
+                        :on-key-down #(if (= 13 (.. % -keyCode))
+                                        (hide-modal modal-cursor % data owner))
+                        :default-value (:task modal-cursor)})
+            (if-not valid?
+              (dom/div "Cannot have a modal-cursor without text")))))))
+)
